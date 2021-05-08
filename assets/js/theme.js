@@ -1,0 +1,115 @@
+
+const btnBurger = document.querySelector('.btn-burger');
+const btnReturn = document.querySelector('.btn-close');
+const headerNav = document.querySelector('header');
+const playIcon = document.querySelector('.header-image-play');
+const changeLang = document.querySelector('.change-language');
+const menuLink = document.getElementsByClassName('link');
+
+
+let headerMenu = document.querySelector('.header-nav-bar');
+let mobLang = document.querySelector('.lang-for-mob');
+let headerImage = document.querySelector('.header-image');
+let checkBox = document.querySelector('#checkbox');
+let submitButton = document.querySelector('.contact-form-submit-button');
+
+let buttt = document.querySelector('.piesaki-sapni-form');
+
+let submit_piesaki_sapni = document.querySelector('.piesaki-sapni-submit');
+
+function clickSubmit() {
+  if (checkBox.checked == true) {
+    submitButton.classList.remove('disabled');
+  } else {
+    submitButton.classList.add('disabled');
+  }
+}
+
+document.querySelector('.header-image-play').onclick = function() {
+  this.style.display = 'none';
+  headerImage.style.display = 'none';
+  document.querySelector('.video').style.display = 'block';
+  document.querySelector('iframe.facebook-video')
+    .src="https://www.facebook.com/plugins/video.php?height=722&href=https%3A%2F%2Fwww.facebook.com%2FsparkleheartLV%2Fvideos%2F2368016840121489%2F&show_text=false&width=1366";
+};
+
+
+document.querySelector('.video-container-img-play').onclick = function() {
+  this.style.display = 'none';
+  document.querySelector('.video-container-img').style.display = 'none';
+  document.querySelector('.sapnu-banka-video').style.display = 'block';
+  document.querySelector('iframe.sapnu-banka-fb-video')
+    .src="https://www.facebook.com/plugins/video.php?height=769&href=https%3A%2F%2Fwww.facebook.com%2FsparkleheartLV%2Fvideos%2F2368016840121489%2F&show_text=false&width=1366";
+};
+
+
+
+const openMenu = () => {
+  btnBurger.classList.remove('btn-active');
+  btnBurger.classList.add('btn-hide');
+  btnReturn.classList.remove('btn-hide');
+  playIcon.classList.add('btn-hide');
+  headerNav.classList.add('open-header-menu');
+
+  headerMenu.style.display='flex';
+  mobLang.style.display='flex';
+  document.querySelector('.header-backgr').classList.add('header-container');
+
+  document.querySelector('header').style.position='relative';
+  document.querySelector('main').style.display='none';
+  document.querySelector('footer').style.display='none';
+
+}
+
+const closeMenu = () => {
+  btnBurger.classList.add('btn-active');
+  btnBurger.classList.remove('btn-hide');
+  btnReturn.classList.add('btn-hide');
+  playIcon.classList.remove('btn-hide');
+  headerNav.classList.remove('open-header-menu');
+
+  headerMenu.style.display='none';
+  mobLang.style.display='none';
+  document.querySelector('.header-backgr').classList.remove('header-container');
+
+  document.querySelector('header').style.position='fixed';
+  document.querySelector('main').style.display='block';
+  document.querySelector('footer').style.display='block';
+}
+
+btnBurger.addEventListener('click', openMenu);
+btnReturn.addEventListener('click', closeMenu);
+
+
+function trackScroll() {
+  let scrolled = window.pageYOffset;
+  let coords = document.documentElement.clientHeight;
+
+  if (scrolled > coords) {
+    goTopBtn.classList.add('back-to-top-show');
+  }
+  if (scrolled < coords) {
+    goTopBtn.classList.remove('back-to-top-show');
+  }
+}
+
+
+function backToTop() {
+  if (window.pageYOffset > 0) {
+    window.scrollBy(0, -80);
+    setTimeout(backToTop, 10);
+  }
+}
+
+let goTopBtn = document.querySelector('.back-to-top');
+window.addEventListener('scroll', trackScroll);
+goTopBtn.addEventListener('click', backToTop);
+
+
+
+function closeAll(e) {
+  closeMenu();
+}
+for (let i = 0; i < menuLink.length; i++) {
+  menuLink[i].addEventListener('click', closeAll);
+}
